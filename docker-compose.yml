@@ -1,0 +1,94 @@
+version: '3' 
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - ${NGINX_PROT}:80
+    volumes: 
+      - ${DATA_PATH_HOST}:/usr/share/nginx/html
+      - ${NGINX_CONF_PATH}:/etc/nginx/conf.d
+      - ${NGINX_CONF_FILE_PATH}:/etc/nginx/nginx.conf
+      - ${NGINX_LOG_PATH}:/var/log/nginx
+    links:
+      - php74
+      - php80
+      - php81
+    depends_on:
+      - php74
+      - php80
+      - php81
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      - docker-network
+    restart: always
+
+  php74:
+    build: ./php74
+    ports:
+      - ${PHP74_PROT}:9000
+    volumes: 
+      - ${DATA_PATH_HOST}:/usr/share/nginx/html
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      - docker-network
+    restart: always
+
+  php80:
+    build: ./php80
+    ports:
+      - ${PHP80_PROT}:9000
+    volumes: 
+      - ${DATA_PATH_HOST}:/usr/share/nginx/html
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      - docker-network
+    restart: always
+
+  php81:
+    build: ./php81
+    ports:
+      - ${PHP81_PROT}:9000
+    volumes: 
+      - ${DATA_PATH_HOST}:/usr/share/nginx/html
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      - docker-network
+    restart: always
+
+  mysql:
+    image: biarms/mysql:5.7.30-linux-arm64v8
+    ports:
+      - ${MYSQL_PROT}:3306
+    volumes:
+      - ${MYSQL_DATA_PATH}:/var/lib/mysql
+    command: [
+      '--character-set-server=utf8mb4',
+      '--collation-server=utf8mb4_unicode_ci',
+      '--innodb_use_native_aio=0'
+    ]
+    environment:
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - TZ=Asia/Shanghai
+    networks:      
+      - docker-network
+    restart: always
+
+  redis:
+    image: redis:latest
+    ports:
+      - ${REDIS_PORT}:6379
+    volumes:
+      - ${REDIS_DATA_PATH}:/data
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      - docker-network  
+    restart: always
+    
+networks: 
+    docker-network:
