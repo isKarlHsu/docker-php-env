@@ -10,7 +10,7 @@ RUN apt-get update &&\
     docker-php-ext-install -j$(nproc) gd
 
 #安装其他扩展
-RUN docker-php-ext-install -j$(nproc) bcmath zip && docker-php-ext-enable bcmath zip
+RUN docker-php-ext-install -j$(nproc) bcmath zip pdo_mysql && docker-php-ext-enable bcmath zip pdo_mysql
 
 #pecl 安装扩展 redis swoole
 RUN pecl install redis-5.3.7 && pecl install swoole && docker-php-ext-enable redis swoole

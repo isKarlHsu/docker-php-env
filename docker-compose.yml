@@ -29,6 +29,7 @@ services:
       - ${PHP74_PROT}:9000
     volumes: 
       - ${DATA_PATH_HOST}:/usr/share/nginx/html
+      # - ${PHP74_CONF_PATH}:/usr/local/etc/php
     environment:
       - TZ=Asia/Shanghai
     networks:
@@ -41,6 +42,7 @@ services:
       - ${PHP80_PROT}:9000
     volumes: 
       - ${DATA_PATH_HOST}:/usr/share/nginx/html
+      # - ${PHP80_CONF_PATH}:/usr/local/etc/php
     environment:
       - TZ=Asia/Shanghai
     networks:
@@ -53,6 +55,7 @@ services:
       - ${PHP81_PROT}:9000
     volumes: 
       - ${DATA_PATH_HOST}:/usr/share/nginx/html
+      # - ${PHP81_CONF_PATH}:/usr/local/etc/php
     environment:
       - TZ=Asia/Shanghai
     networks:

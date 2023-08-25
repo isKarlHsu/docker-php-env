@@ -1,5 +1,1 @@
 .env
-/mysql/data/*
-/nginx/conf/*
-/nginx/logs/*
-/redis/data/*
