@@ -5,7 +5,7 @@ services:
     ports:
       - ${NGINX_PROT}:80
     volumes: 
-      - ${DATA_PATH_HOST}:/usr/share/nginx/html
+      - ${DATA_PATH_HOST}:/var/www/html
       - ${NGINX_CONF_PATH}:/etc/nginx/conf.d
       - ${NGINX_CONF_FILE_PATH}:/etc/nginx/nginx.conf
       - ${NGINX_LOG_PATH}:/var/log/nginx
@@ -28,7 +28,7 @@ services:
     ports:
       - ${PHP74_PROT}:9000
     volumes: 
-      - ${DATA_PATH_HOST}:/usr/share/nginx/html
+      - ${DATA_PATH_HOST}:/var/www/html
       # - ${PHP74_CONF_PATH}:/usr/local/etc/php
     environment:
       - TZ=Asia/Shanghai
@@ -41,7 +41,7 @@ services:
     ports:
       - ${PHP80_PROT}:9000
     volumes: 
-      - ${DATA_PATH_HOST}:/usr/share/nginx/html
+      - ${DATA_PATH_HOST}:/var/www/html
       # - ${PHP80_CONF_PATH}:/usr/local/etc/php
     environment:
       - TZ=Asia/Shanghai
@@ -54,7 +54,7 @@ services:
     ports:
       - ${PHP81_PROT}:9000
     volumes: 
-      - ${DATA_PATH_HOST}:/usr/share/nginx/html
+      - ${DATA_PATH_HOST}:/var/www/html
       # - ${PHP81_CONF_PATH}:/usr/local/etc/php
     environment:
       - TZ=Asia/Shanghai
