@@ -10,12 +10,11 @@ RUN apt-get update && apt-get install -y \
     docker-php-ext-configure gd --with-webp=/usr/include/webp --with-jpeg=/usr/include --with-freetype=/usr/include/freetype2/ && \
     docker-php-ext-install -j$(nproc) gd
 
+# 安装系统依赖，如编译工具和库
 RUN apt-get install -y --no-install-recommends libzip-dev && rm -r /var/lib/apt/lists/*
 
-# 安装PHP扩展依赖
+# 先安装依赖，再安装扩展
 RUN docker-php-ext-configure zip && docker-php-ext-configure pdo_mysql
-
-# 安装其他扩展
 RUN docker-php-ext-install -j$(nproc) bcmath pdo_mysql zip
 
 # 安装 redis swoole
