@@ -62,20 +62,39 @@ services:
       - docker-network
     restart: always
 
-  mysql:
+  mysql57:
     image: biarms/mysql:5.7.30-linux-arm64v8
     ports:
-      - ${MYSQL_PROT}:3306
+      - ${MYSQL57_PROT}:3306
     volumes:
-      - ${MYSQL_DATA_PATH}:/var/lib/mysql
+      - ${MYSQL57_DATA_PATH}:/var/lib/mysql
     command: [
       '--character-set-server=utf8mb4',
       '--collation-server=utf8mb4_unicode_ci',
       '--innodb_use_native_aio=0'
     ]
     environment:
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL57_USER}
+      - MYSQL_ROOT_PASSWORD=${MYSQL57_ROOT_PASSWORD}
+      - TZ=Asia/Shanghai
+    networks:      
+      - docker-network
+    restart: always
+
+  mysql80:
+    image: arm64v8/mysql:8.0.34
+    ports:
+      - ${MYSQL80_PROT}:3306
+    volumes:
+      - ${MYSQL80_DATA_PATH}:/var/lib/mysql
+    command: [
+      '--character-set-server=utf8mb4',
+      '--collation-server=utf8mb4_unicode_ci',
+      '--innodb_use_native_aio=0'
+    ]
+    environment:
+      # - MYSQL_USER=${MYSQL80_USER}
+      - MYSQL_ROOT_PASSWORD=${MYSQL80_ROOT_PASSWORD}
       - TZ=Asia/Shanghai
     networks:      
       - docker-network
